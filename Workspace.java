@@ -5,9 +5,7 @@ import java.util.function.Consumer;
 public class Workspace<T> {
 
     private transient int size = 0;
-    //первый элемент
     private transient Node<T> first;
-    //последний элемент
     private transient Node<T> last;
 
     /**
@@ -23,9 +21,7 @@ public class Workspace<T> {
         }
     }
 
-    /**
-     * Присоединяет первый элемент
-     */
+
     private void linkFirst(T t) {
         final Node<T> k = this.first;
         final Node<T> node = new Node<>(t, null, k);
@@ -38,9 +34,7 @@ public class Workspace<T> {
         size++;
     }
 
-    /**
-     * Присоединяет последний элемент
-     */
+    
     private void linkLast(T t) {
         final Node<T> k = this.last;
         final Node<T> node = new Node<>(t, k, null);
@@ -54,16 +48,12 @@ public class Workspace<T> {
     }
 
 
-    /**
-     * Получение кол-ва элементов списка
-     */
+
     public int size() {
         return this.size;
     }
 
-    /**
-     * Проверка списка на пустоту
-     */
+   
     public boolean isEmpty() {
         if (size==0) {
             return true;
@@ -72,9 +62,7 @@ public class Workspace<T> {
         }
     }
 
-    /**
-     * Проверка на содержание простого числа в списке
-     */
+   
     public boolean containsOnly(Integer o) {
         if (o == 1 || o == 2) {
             return true;
@@ -88,9 +76,7 @@ public class Workspace<T> {
         return true;
     }
 
-    /**
-     * Добавление элемента по индексу
-     */
+
     public void add(int index, int element) throws Exception {
         if (index > size && index < 0) {
             throw new IndexOutOfBoundsException();
@@ -106,9 +92,7 @@ public class Workspace<T> {
         this.size++;
     }
 
-    /**
-     * Удаление элемента по индексу
-     */
+ 
     public void remove(int index) {
         if (index > size && index < 0) {
             throw new IndexOutOfBoundsException();
@@ -122,9 +106,7 @@ public class Workspace<T> {
         t.setPrev(t.getNext());
     }
 
-    /**
-     * Проверка на содержание объекта в списке
-     */
+   
     public boolean contains(Object o) {
 
         if (o==null) {
@@ -143,9 +125,6 @@ public class Workspace<T> {
         return false;
     }
 
-    /**
-     * Добавление элемента к массиву в конец
-     */
     public void add(T t) {
         linkLast(t);
     }
@@ -176,9 +155,7 @@ public class Workspace<T> {
         return false;
     }
 
-    /**
-     * Очистка листа
-     */
+   
     public void clear() {
         first.setNext(null);
         last.setValue(null);
@@ -187,10 +164,7 @@ public class Workspace<T> {
         size=0;
     }
 
-    /**
-     * Получение элемента по индексу
-     * @return
-     */
+   
     public T get(int index) {
         int counter = 0;
         Node<T> t = first;
@@ -205,9 +179,7 @@ public class Workspace<T> {
         return  t.getValue();
     }
 
-    /**
-     * Нахождение индекс первого нужного объекта
-     */
+
     public int indexOf(Object o) {
         int count=0;
         if (contains(o)) {
@@ -228,18 +200,14 @@ public class Workspace<T> {
         return -1;
     }
 
-    /**
-     * Перебор всех элементов
-     */
+
     public void forEach(Consumer action) {
         for (Node<T> t = first; t!=null; t=t.getNext()) {
             action.accept(t);
         }
     }
 
-    /**
-     * Приведение листа к массиву
-     */
+   
     public Object[] toArray() {
         Object[] array = new Object[size];
         int i=0;
@@ -249,21 +217,7 @@ public class Workspace<T> {
         }
         return array;
     }
-    
-    /**
-     * Создание доп.связного листа
-     */
-    public Workspace subList(int fromIndex, int toIndex) {
-        Workspace<T> list = new Workspace<>();
-        for (Node<T> t = first; t!=null; t=t.getNext()) {
-            list.add((T) get(fromIndex));
-        }
-        return list;
-    }
-
-    /**
-     * Пустой конструктор
-     */
+   
     public Workspace() {
     }
     
