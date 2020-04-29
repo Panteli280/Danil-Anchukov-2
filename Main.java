@@ -9,7 +9,7 @@ public class Main {
         list.add(1);
         list.add(2);
         list.add(28);
-        list.add(2,3);
+        list.add(23);
         list.tusk(list);
         int t = list.size();
         System.out.println(t);
