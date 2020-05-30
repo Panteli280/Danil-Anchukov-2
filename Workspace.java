@@ -12,9 +12,6 @@ public class LinkedList<T> {
      * 18.	В двусвязном списке целых чисел перед и после каждого простого числа вставить новые элементы со значением 0.
      */
 
-    /**
-     * (с) "сделан нелогично и не правильно." Какие вопросы могут быть к пустому конструктору? 
-     */
     public Workspace() {
     }
 
@@ -163,7 +160,7 @@ public class LinkedList<T> {
     }
     
    /**
-     * туск это бивень. А бивень, как известно, это опечатка в слове таск :3
+     * (с)"что еще за туск?" Туск это бивень. А бивень, как известно, это опечатка в слове таск :3
      */
      public void task(Workspace<Integer> list) {
         for (int i = 0; i < list.size(); i++) {
@@ -209,14 +206,15 @@ public class LinkedList<T> {
         }
     }
 
-   
-    public Object[] toArray() {
-        Object[] array = new Object[size];
+    /**
+     * (с)"Сделан нелогично и не правильно." А теперь, если сразу массив?
+     */
+   public ArrayList toArray() {
+        ArrayList array = new ArrayList();
         int i=0;
         for (Node<T> t = first; t != null; t = t.getNext()) {
-            array[i] = t.getValue();
+            array.set(i, t.getValue());
             i++;
         }
         return array;
     }
-}
