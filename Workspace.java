@@ -4,9 +4,9 @@ import java.util.function.Consumer;
 
 public class LinkedList<T> {
 
-    private transient int size = 0;
-    private transient Node<T> first;
-    private transient Node<T> last;
+    private int size = 0;
+    private Node<T> first;
+    private Node<T> last;
 
     /**
      * 18.	В двусвязном списке целых чисел перед и после каждого простого числа вставить новые элементы со значением 0.
@@ -19,8 +19,11 @@ public class LinkedList<T> {
         linkLast(t);
     }
     
+    /**
+     * может add и не предполагает, но у меня то add по индексу. И в стандартной библиотеке java кстати оба метода одинаково названы
+     */
     public void addIndex(int index, int element) {
-            if (index > size && index < 0) {
+           if (index > size || index < 0) {
             throw new IndexOutOfBoundsException();
         }
         int counter = 0;
@@ -35,19 +38,54 @@ public class LinkedList<T> {
     }
     
         public T get(int index) {
+            if (index > size || index < 0) {
+            throw new IndexOutOfBoundsException();
+        }
         int counter = 0;
         Node<T> t = first;
-        try {
             while (counter!=index) {
                 t = t.getNext();
                 counter++;
             }
-        } catch (IndexOutOfBoundsException e) {
-            e.printStackTrace();
-        }
         return  t.getValue();
     }
+    
+       public void remove(int index) {
+         if (index > size || index < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+        int counter = 0;
+        Node<T> t = first;
+        while (counter!=index) {
+            t = t.getNext();
+            counter++;
+        }
+        t.setPrev(t.getNext());
+    }
 
+     /**
+     * Удаление конкретного элемента
+     */
+    public boolean remove(Object o) {
+            if (o==null) {
+                for (Node<T> t = first; t!=null; t = t.getNext()) {
+                    if (t.getValue()==null) {
+                        t.getPrev().setPrev(t.getNext());
+                        return true;
+                    }
+                }
+            } else {
+                for (Node<T> t = first; t!=null; t = t.getNext()) {
+                    if (t.getValue().equals(o)) {
+                        t.getPrev().setPrev(t.getNext());
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
     private void linkFirst(T t) {
         final Node<T> k = this.first;
         final Node<T> node = new Node<>(t, null, k);
@@ -60,6 +98,7 @@ public class LinkedList<T> {
         size++;
     }
 
+    
     private void linkLast(T t) {
         final Node<T> k = this.last;
         final Node<T> node = new Node<>(t, k, null);
@@ -99,21 +138,7 @@ public class LinkedList<T> {
         }
         return true;
     }
-    
-    public void remove(int index) {
-        if (index > size && index < 0) {
-            throw new IndexOutOfBoundsException();
-        }
-        int counter = 0;
-        Node<T> t = first;
-        while (counter!=index) {
-            t = t.getNext();
-            counter++;
-        }
-        t.setPrev(t.getNext());
-    }
-
-   
+  
     public boolean contains(Object o) {
         if (o==null) {
             for (Node<T> t = first; t!=null; t = t.getNext()) {
@@ -141,33 +166,6 @@ public class LinkedList<T> {
         }
     }
 
-    /**
-     * Удаление элемента
-     */
-    public boolean remove(Object o) {
-        if (!contains(o)) {
-            return false;
-        } else {
-            if (o==null) {
-                for (Node<T> t = first; t!=null; t = t.getNext()) {
-                    if (t.getValue()==null) {
-                        t.getPrev().setPrev(t.getNext());
-                        return true;
-                    }
-                }
-            } else {
-                for (Node<T> t = first; t!=null; t = t.getNext()) {
-                    if (t.getValue().equals(o)) {
-                        t.getPrev().setPrev(t.getNext());
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-   
     public void clear() {
         first.setNext(null);
         last.setValue(null);
