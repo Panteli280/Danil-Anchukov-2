@@ -133,7 +133,7 @@ public Workspace() {
     }
     
      public void task(Workspace<Integer> list) throws Exception {
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i++) {
             if (containsOnly(list.get(i))){
                 list.add(i, 0);
                 list.add(i+2, 0);
