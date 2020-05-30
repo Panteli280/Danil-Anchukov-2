@@ -2,7 +2,7 @@ package com.company;
 
 import java.util.function.Consumer;
 
-public class Workspace<T> {
+public class LinkedList<T> {
 
     private transient int size = 0;
     private transient Node<T> first;
