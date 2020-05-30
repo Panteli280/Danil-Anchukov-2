@@ -15,16 +15,38 @@ public class Workspace<T> {
 public Workspace() {
     }
 
-    public void task(Workspace<Integer> list) throws Exception {
-        for (int i = 0; i < list.size(); i++) {
-            if (containsOnly(list.get(i))){
-                list.add(i, 0);
-                list.add(i+2, 0);
-                i = i+2;
-            }
-        }
+     public void add(T t) {
+        linkLast(t);
     }
-
+    
+    public void addIndex(int index, int element) throws Exception {
+        if (index > size || index < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+        int counter = 0;
+        Node<T> nd = first;
+        do {
+            nd = nd.getNext();
+            counter++;
+        } while (counter!=index);
+        nd.setNext(new Node(element, nd, nd.getNext()));
+        nd.getPrev() = nd.getPrev().getNext() = new Node();
+        this.size++;
+    }
+    
+        public T get(int index) {
+        int counter = 0;
+        Node<T> t = first;
+        try {
+            while (counter!=index) {
+                t = t.getNext();
+                counter++;
+            }
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+        }
+        return  t.getValue();
+    }
 
     private void linkFirst(T t) {
         final Node<T> k = this.first;
@@ -51,13 +73,10 @@ public Workspace() {
         size++;
     }
 
-
-
     public int size() {
         return this.size;
     }
 
-   
     public boolean isEmpty() {
         if (size==0) {
             return true;
@@ -69,7 +88,7 @@ public Workspace() {
     /**
      * Проверка на содержание простого числа в списке
      */
-    public boolean containsOnly(Integer o) {
+    public boolean containsOnlySimple(Integer o) {
         if (o == 1 || o == 2) {
             return true;
         } else {
@@ -81,27 +100,7 @@ public Workspace() {
         }
         return true;
     }
-
- public void add(T t) {
-        linkLast(t);
-    }
     
-    public void addIndex(int index, int element) throws Exception {
-        if (index > size || index < 0) {
-            throw new IndexOutOfBoundsException();
-        }
-        int counter = 0;
-        Node<T> nd = first;
-        do {
-            nd = nd.getNext();
-            counter++;
-        } while (counter!=index);
-        nd.setNext(new Node(element, nd, nd.getNext()));
-        nd.getPrev() = nd.getPrev().getNext() = new Node();
-        this.size++;
-    }
-
- 
     public void remove(int index) {
         if (index > size && index < 0) {
             throw new IndexOutOfBoundsException();
@@ -131,6 +130,16 @@ public Workspace() {
             }
         }
         return false;
+    }
+    
+     public void task(Workspace<Integer> list) throws Exception {
+        for (int i = 0; i < list.size(); i++) {
+            if (containsOnly(list.get(i))){
+                list.add(i, 0);
+                list.add(i+2, 0);
+                i = i+2;
+            }
+        }
     }
 
     /**
@@ -167,23 +176,7 @@ public Workspace() {
         last.setPrev(null);
         size=0;
     }
-
-   
-    public T get(int index) {
-        int counter = 0;
-        Node<T> t = first;
-        try {
-            while (counter!=index) {
-                t = t.getNext();
-                counter++;
-            }
-        } catch (IndexOutOfBoundsException e) {
-            e.printStackTrace();
-        }
-        return  t.getValue();
-    }
-
-
+    
     public int indexOf(Object o) {
         int count=0;
         if (contains(o)) {
