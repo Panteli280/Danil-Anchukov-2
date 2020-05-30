@@ -1,4 +1,4 @@
-package com.devijoe.project;
+package com.company;
 
 import java.util.LinkedList;
 
