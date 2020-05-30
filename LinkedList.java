@@ -11,7 +11,11 @@ public class Workspace<T> {
     /**
      * 18.	В двусвязном списке целых чисел перед и после каждого простого числа вставить новые элементы со значением 0.
      */
-    public void tusk(Workspace<Integer> list) throws Exception {
+
+public Workspace() {
+    }
+
+    public void task(Workspace<Integer> list) throws Exception {
         for (int i = 0; i < list.size(); i++) {
             if (containsOnly(list.get(i))){
                 list.add(i, 0);
@@ -62,7 +66,9 @@ public class Workspace<T> {
         }
     }
 
-   
+    /**
+     * Проверка на содержание простого числа в списке
+     */
     public boolean containsOnly(Integer o) {
         if (o == 1 || o == 2) {
             return true;
@@ -76,9 +82,12 @@ public class Workspace<T> {
         return true;
     }
 
-
-    public void add(int index, int element) throws Exception {
-        if (index > size && index < 0) {
+ public void add(T t) {
+        linkLast(t);
+    }
+    
+    public void addIndex(int index, int element) throws Exception {
+        if (index > size || index < 0) {
             throw new IndexOutOfBoundsException();
         }
         int counter = 0;
@@ -108,7 +117,6 @@ public class Workspace<T> {
 
    
     public boolean contains(Object o) {
-
         if (o==null) {
             for (Node<T> t = first; t!=null; t = t.getNext()) {
                 if (t.getValue()==null) {
@@ -123,10 +131,6 @@ public class Workspace<T> {
             }
         }
         return false;
-    }
-
-    public void add(T t) {
-        linkLast(t);
     }
 
     /**
@@ -217,8 +221,4 @@ public class Workspace<T> {
         }
         return array;
     }
-   
-    public Workspace() {
-    }
-    
 }
