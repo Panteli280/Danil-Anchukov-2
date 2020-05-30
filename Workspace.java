@@ -23,7 +23,7 @@ public class LinkedList<T> {
     }
     
     /**
-     * может add и не предполагает, но у меня то add по индексу. И в стандартной библиотеке java, к слову, оба метода одинаково названы
+     * может add и не предполагает индекс, но конкретно этот как раз его и должен спрашивать. И в стандартной библиотеке java, к слову, оба метода одинаково названы
      */
     public void addIndex(int index, int element) {
            if (index > size || index < 0) {
@@ -40,7 +40,10 @@ public class LinkedList<T> {
         this.size++;
     }
     
-        public T get(int index) {
+      /**
+     * (с) "зачем этот метод? Он ни к селу не к городу." Вот вообще не понимаю. И метод хороший - проверять значение по индексу иногда очень нужно. И даже в библиотеке java он есть
+     */
+        public T getIndex(int index) {
             if (index > size || index < 0) {
             throw new IndexOutOfBoundsException();
         }
