@@ -12,6 +12,9 @@ public class LinkedList<T> {
      * 18.	В двусвязном списке целых чисел перед и после каждого простого числа вставить новые элементы со значением 0.
      */
 
+    /**
+     * (с) "сделан нелогично и не правильно." Какие вопросы могут быть к пустому конструктору? 
+     */
     public Workspace() {
     }
 
@@ -20,7 +23,7 @@ public class LinkedList<T> {
     }
     
     /**
-     * может add и не предполагает, но у меня то add по индексу. И в стандартной библиотеке java кстати оба метода одинаково названы
+     * может add и не предполагает, но у меня то add по индексу. И в стандартной библиотеке java, к слову, оба метода одинаково названы
      */
     public void addIndex(int index, int element) {
            if (index > size || index < 0) {
@@ -156,6 +159,9 @@ public class LinkedList<T> {
         return false;
     }
     
+   /**
+     * туск это бивень. А бивень, как известно, это опечатка в слове таск :3
+     */
      public void task(Workspace<Integer> list) {
         for (int i = 0; i < list.size(); i++) {
             if (containsOnly(list.get(i))){
