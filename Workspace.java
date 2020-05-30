@@ -167,7 +167,7 @@ public class LinkedList<T> {
      */
      public void task(Workspace<Integer> list) {
         for (int i = 0; i < list.size(); i++) {
-            if (containsOnly(list.get(i))){
+            if (containsOnlySimple(list.get(i))){
                 list.add(i, 0);
                 list.add(i+2, 0);
                 i = i+2;
