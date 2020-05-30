@@ -19,9 +19,9 @@ public Workspace() {
         linkLast(t);
     }
     
-    public void addIndex(int index, int element) throws Exception {
-        if (index > size || index < 0) {
-            throw new IndexOutOfBoundsException();
+    public void addIndex(int index, int element) {
+           if (index > size || index < 0) {
+            stop;
         }
         int counter = 0;
         Node<T> nd = first;
@@ -102,8 +102,8 @@ public Workspace() {
     }
     
     public void remove(int index) {
-        if (index > size && index < 0) {
-            throw new IndexOutOfBoundsException();
+         if (index > size || index < 0) {
+            stop;
         }
         int counter = 0;
         Node<T> t = first;
@@ -132,8 +132,8 @@ public Workspace() {
         return false;
     }
     
-     public void task(Workspace<Integer> list) throws Exception {
-        for (int i = 0; i++) {
+     public void task(Workspace<Integer> list) {
+        for (int i = 0; i < list.size(); i++) {
             if (containsOnly(list.get(i))){
                 list.add(i, 0);
                 list.add(i+2, 0);
@@ -171,7 +171,6 @@ public Workspace() {
    
     public void clear() {
         first.setNext(null);
-        last.setValue(null);
         last.setValue(null);
         last.setPrev(null);
         size=0;
