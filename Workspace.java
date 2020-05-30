@@ -12,7 +12,7 @@ public class LinkedList<T> {
      * 18.	В двусвязном списке целых чисел перед и после каждого простого числа вставить новые элементы со значением 0.
      */
 
-public Workspace() {
+    public Workspace() {
     }
 
      public void add(T t) {
@@ -20,8 +20,8 @@ public Workspace() {
     }
     
     public void addIndex(int index, int element) {
-           if (index > size || index < 0) {
-            stop;
+            if (index > size && index < 0) {
+            throw new IndexOutOfBoundsException();
         }
         int counter = 0;
         Node<T> nd = first;
@@ -60,7 +60,6 @@ public Workspace() {
         size++;
     }
 
-    
     private void linkLast(T t) {
         final Node<T> k = this.last;
         final Node<T> node = new Node<>(t, k, null);
@@ -102,8 +101,8 @@ public Workspace() {
     }
     
     public void remove(int index) {
-         if (index > size || index < 0) {
-            stop;
+        if (index > size && index < 0) {
+            throw new IndexOutOfBoundsException();
         }
         int counter = 0;
         Node<T> t = first;
