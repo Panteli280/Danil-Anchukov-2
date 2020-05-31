@@ -8,7 +8,7 @@ public class LinkedList<T> {
     private Node<T> first;
     private Node<T> last;
 
-    /**
+   /**
      * 18.	В двусвязном списке целых чисел перед и после каждого простого числа вставить новые элементы со значением 0.
      */
 
@@ -19,7 +19,7 @@ public class LinkedList<T> {
         linkLast(t);
     }
     
-    /**
+   /**
      * (с) "add - не предполагает наличие индекса" 
      */
     
@@ -38,7 +38,7 @@ public class LinkedList<T> {
         this.size++;
     }
     
-      /**
+   /**
      * (с) "зачем этот метод? Он ни к селу не к городу." 
      */
         public T get(int index) {
@@ -115,14 +115,6 @@ public class LinkedList<T> {
     public int size() {
         return this.size;
     }
-
-    public boolean isEmpty() {
-        if (size==0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
   
     public boolean contains(Object o) {
         if (o==null) {
@@ -146,6 +138,14 @@ public class LinkedList<T> {
         last.setValue(null);
         last.setPrev(null);
         size=0;
+    }
+
+  public boolean isEmpty() {
+        if (size==0) {
+            return true;
+        } else {
+            return false;
+        }
     }
     
     public int indexOf(Object o) {
@@ -174,7 +174,7 @@ public class LinkedList<T> {
         }
     }
 
-    /**
+   /**
      * (с)"Сделан нелогично и не правильно." Работает и взят с оригинального
      */
    public Object[] toArray() {
@@ -185,4 +185,29 @@ public class LinkedList<T> {
             i++;
         }
         return array;
+       
+         public void task(LinkedList<Integer> list) throws Exception {
+        for (int i = 0; i < list.size(); i++) {
+            if (isSimple(list.get(i))){
+                list.add(i, 0);
+                list.add(i+2, 0);
+                i = i+2;
+            }
+        }
+    }
+
+   /**
+     * Проверка на простое число. Чисто метод для таска
+     */
+    public boolean isSimple(Integer o) {
+        if (o == 1 || o == 2) {
+            return true;
+        } else {
+            for (int j = 2; j < o; j++) {
+                if (o % j == 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
