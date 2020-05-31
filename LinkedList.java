@@ -20,9 +20,10 @@ public class LinkedList<T> {
     }
     
     /**
-     * может add и не предполагает индекс, но конкретно этот как раз его и должен спрашивать. И в стандартной библиотеке java, к слову, оба метода одинаково названы
+     * (с) "add - не предполагает наличие индекса" 
      */
-    public void addIndex(int index, int element) {
+    
+    public void add(int index, int element) {
            if (index > size || index < 0) {
             throw new IndexOutOfBoundsException();
         }
@@ -38,9 +39,9 @@ public class LinkedList<T> {
     }
     
       /**
-     * (с) "зачем этот метод? Он ни к селу не к городу." Вот вообще не понимаю. И метод хороший - проверять значение по индексу иногда очень нужно. И даже в библиотеке java он есть
+     * (с) "зачем этот метод? Он ни к селу не к городу." 
      */
-        public T getIndex(int index) {
+        public T get(int index) {
             if (index > size || index < 0) {
             throw new IndexOutOfBoundsException();
         }
@@ -66,9 +67,6 @@ public class LinkedList<T> {
         t.setPrev(t.getNext());
     }
 
-     /**
-     * Удаление конкретного элемента
-     */
     public boolean remove(Object o) {
             if (o==null) {
                 for (Node<T> t = first; t!=null; t = t.getNext()) {
@@ -125,22 +123,6 @@ public class LinkedList<T> {
             return false;
         }
     }
-
-    /**
-     * Проверка на содержание простого числа в списке
-     */
-    public boolean containsOnlySimple(Integer o) {
-        if (o == 1 || o == 2) {
-            return true;
-        } else {
-            for (int j = 2; j < o; j++) {
-                if (o % j == 0) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
   
     public boolean contains(Object o) {
         if (o==null) {
@@ -157,19 +139,6 @@ public class LinkedList<T> {
             }
         }
         return false;
-    }
-    
-   /**
-     * (с)"что еще за туск?" Туск это бивень. А бивень, как известно, это опечатка в слове таск :3
-     */
-     public void task(Workspace<Integer> list) {
-        for (int i = 0; i < list.size(); i++) {
-            if (containsOnlySimple(list.get(i))){
-                list.add(i, 0);
-                list.add(i+2, 0);
-                i = i+2;
-            }
-        }
     }
 
     public void clear() {
@@ -199,7 +168,6 @@ public class LinkedList<T> {
         return -1;
     }
 
-
     public void forEach(Consumer action) {
         for (Node<T> t = first; t!=null; t=t.getNext()) {
             action.accept(t);
@@ -207,13 +175,13 @@ public class LinkedList<T> {
     }
 
     /**
-     * (с)"Сделан нелогично и не правильно." А теперь, если сразу массив?
+     * (с)"Сделан нелогично и не правильно." Работает и взят с оригинального
      */
-   public ArrayList toArray() {
-        ArrayList array = new ArrayList();
+   public Object[] toArray() {
+        Object[] array = new Object[size];
         int i=0;
-        for (Node<T> t = first; t != null; t = t.getNext()) {
-            array.set(i, t.getValue());
+        for (LinkedNode<T> t = first; t != null; t = t.getNext()) {
+            array[i] = t.getValue();
             i++;
         }
         return array;
