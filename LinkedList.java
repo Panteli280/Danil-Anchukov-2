@@ -23,19 +23,23 @@ public class LinkedList<T> {
      * (с) "add - не предполагает наличие индекса" 
      */
     
-    public void add(int index, int element) {
-           if (index > size || index < 0) {
+    public void add(int index, T element) {
+        if (index > size || index < 0) {
             throw new IndexOutOfBoundsException();
+           }
+        if (index == size) {
+            add(element);
         }
-        int counter = 0;
-        Node<T> nd = first;
-        do {
-            nd = nd.getNext();
-            counter++;
-        } while (counter!=index);
-        nd.setNext(new Node(element, nd, nd.getNext()));
-        nd.getPrev() = nd.getPrev().getNext() = new Node();
-        this.size++;
+        Node oldElement = getLinkByIndex(index);
+        Node newElement = new Node(element, oldElement.prev, oldElement);
+        if (oldElement.prev == null) {
+            first = newElement;
+            last = oldElement;
+        } else {
+            oldElement.prev.next = newElement;
+            oldElement.prev = newElement;
+        }
+        size++;
     }
     
    /**
@@ -174,6 +178,22 @@ public class LinkedList<T> {
         }
     }
 
+  private Node getLinkByIndex(int index) {
+        Node result;
+        if (size >> 1 >= index) {
+            result = first;
+            for (int i = 0; i < index; i++) {
+                result = result.next;
+            }
+        } else {
+            result = last;
+            for (int i = size - 1; i > index; i--) {
+                result = result.prev;
+            }
+        }
+        return result;
+    }
+
    /**
      * (с)"Сделан нелогично и не правильно." Работает и взят с оригинального
      */
@@ -185,16 +205,16 @@ public class LinkedList<T> {
             i++;
         }
         return array;
-       
-         public void task(LinkedList<Integer> list) throws Exception {
-        for (int i = 0; i < list.size(); i++) {
-            if (isSimple(list.get(i))){
+      
+       public void task(LinkedList<Integer> list) throws Exception {
+       for (int i = 0; i < list.size; i++){
+            if (isSimple(list.get(i))) {
                 list.add(i, 0);
                 list.add(i+2, 0);
                 i = i+2;
             }
-        }
-    }
+       }
+       }
 
    /**
      * Проверка на простое число. Чисто метод для таска
