@@ -19,32 +19,25 @@ public class LinkedList<T> {
         linkLast(t);
     }
     
-   /**
-     * (с) "add - не предполагает наличие индекса" 
-     */
-    
-    public void add(int index, T element) {
-        if (index > size || index < 0) {
-            throw new IndexOutOfBoundsException();
-           }
+    public void add(int index, T value) {
         if (index == size) {
-            add(element);
-        }
-        Node oldElement = getLinkByIndex(index);
-        Node newElement = new Node(element, oldElement.prev, oldElement);
-        if (oldElement.prev == null) {
-            first = newElement;
-            last = oldElement;
+            add(value);
         } else {
-            oldElement.prev.next = newElement;
-            oldElement.prev = newElement;
+            Node walker = first;
+            int i = 1;
+            while (i < index) {
+                i++;
+                walker = walker.next;
+            }
+            Node node = new Node(value);
+            node.next = walker.next;
+            walker.next.prev = node;
+            walker.next = node;
+            node.prev = walker;
+            size++;
         }
-        size++;
     }
     
-   /**
-     * (с) "зачем этот метод? Он ни к селу не к городу." 
-     */
         public T get(int index) {
             if (index > size || index < 0) {
             throw new IndexOutOfBoundsException();
@@ -177,25 +170,6 @@ public class LinkedList<T> {
         }
     }
 
-  private Node<T> getLinkByIndex(int index) {
-        Node<T> result;
-        if (size >> 1 >= index) {
-            result = first;
-            for (int i = 0; i < index; i++) {
-                result = result.next;
-            }
-        } else {
-            result = last;
-            for (int i = size - 1; i > index; i--) {
-                result = result.prev;
-            }
-        }
-        return result;
-    }
-
-   /**
-     * (с)"Сделан нелогично и не правильно." Работает и взят с оригинального
-     */
    public Object[] toArray() {
         Object[] array = new Object[size];
         int i=0;
@@ -207,29 +181,28 @@ public class LinkedList<T> {
    }
     
        public void task(LinkedList<Integer> list) throws Exception {
-       for (int i = 0; i < list.size; i++){
-            if (isSimple(list.get(i))) {
-                list.add(i, 0);
-                list.add(i+2, 0);
-                i = i+2;
-            }
-       }
-       }
-
-   /**
-     * Проверка на простое число. Чисто метод для таска
-     */
-    public boolean isSimple(Integer o) {
-        if (o == 1 || o == 2) {
-            return true;
-        } else {
-            for (int j = 2; j < o; j++) {
-                if (o % j == 0) {
-                    return false;
+            for (int i = 0; i < list.size; i++){
+                if (isSimple(list.get(i))) {
+                    list.add(i, 0);
+                    list.add(i+2, 0);
+                    i = i+2;
                 }
             }
         }
-        return true;
+    
+    public boolean isSimple(Integer o) {
+            if (o == 0) {
+                return false;
+            }
+            if (o == 1 || o == 2) {
+                return true;
+            }
+                for (int j = 2; j < o; j++) {
+                    if (o % j == 0) {
+                        return false;
+                    }
+                }
+            return true;
+        }
     }
-}
 
