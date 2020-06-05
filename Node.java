@@ -1,21 +1,22 @@
 package com.company;
 
-public class Node<Integer> {
+public class Node {
 
-    private Integer value;
-    Node<Integer> next;
-    Node<Integer> prev;
+    private int value;
+    Node next;
+    Node prev;
 
-    public Node(Integer value, Node<Integer> prev, Node<Integer> next) {
+    public Node(int value, Node prev, Node next) {
         this.value = value;
         this.next = next;
+        this.prev = prev;
     }
 
-    public Node(Integer value) {
+    public Node(int value) {
         this(value, null, null);
     }
 
-    public Integer getValue() {
+    public int getValue() {
         return value;
     }
 
@@ -23,19 +24,19 @@ public class Node<Integer> {
         this.value = value;
     }
 
-    public Node<Integer> getNext() {
+    public Node getNext() {
         return next;
     }
 
-    public void setNext(Node<Integer> next) {
+    public void setNext(Node next) {
         this.next = next;
     }
 
-    public Node<Integer> getPrev() {
+    public Node getPrev() {
         return prev;
     }
 
-    public void setPrev(Node<Integer> prev) {
+    public void setPrev(Node prev) {
         this.prev = prev;
     }
 }
