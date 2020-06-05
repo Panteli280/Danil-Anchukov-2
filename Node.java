@@ -1,46 +1,41 @@
 package com.company;
 
-public class Node<T> {
+public class Node<Integer> {
 
-    //Значение поля
-    private T value;
-    private Node<T> next;
-    private Node<T> prev;
+    private Integer value;
+    Node<Integer> next;
+    Node<Integer> prev;
 
-    public Node(T value, Node<T> prev, Node<T> next) {
+    public Node(Integer value, Node<Integer> prev, Node<Integer> next) {
         this.value = value;
         this.next = next;
     }
 
-    public Node(T value) {
+    public Node(Integer value) {
         this(value, null, null);
     }
 
-    public Node() {
-        this(null);
+    public Integer getValue() {
+        return value;
     }
 
-    public void setValue(T value) {
+    public void setValue(Integer value) {
         this.value = value;
     }
 
-    public void setNext(Node<T> next) {
+    public Node<Integer> getNext() {
+        return next;
+    }
+
+    public void setNext(Node<Integer> next) {
         this.next = next;
     }
 
-    public void setPrev(Node<T> prev) {
-        this.prev = prev;
-    }
-    
-    public T getValue() {
-        return value;
-    }
-    
-       public Node<T> getNext() {
-        return next;
-    }
-    
-    public Node<T> getPrev() {
+    public Node<Integer> getPrev() {
         return prev;
+    }
+
+    public void setPrev(Node<Integer> prev) {
+        this.prev = prev;
     }
 }
